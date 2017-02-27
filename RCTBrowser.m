@@ -43,6 +43,10 @@ RCT_EXPORT_METHOD(presentUrl:(NSString *)url withOptions:(NSDictionary *)options
     }];
 
     UIViewController *rootVC = [[UIApplication sharedApplication] keyWindow].rootViewController;
+    while (rootVC.modalViewController) {
+        rootVC = rootVC.modalViewController;
+    }
+    
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:webVC];
 
     dispatch_async(dispatch_get_main_queue(), ^{
